@@ -3,30 +3,6 @@ from model.TreeLSTMChild import TreeLSTM
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-# class Model( nn.Module ):
-#     def __init__(self, config):
-#
-#         super( Model, self ).__init__()
-#         self.device = config.get("device")
-#         self.dropout = config.get("dropout")
-#         self.input_size = config.get( "input_size" )
-#         self.hidden_size = config.get("hidden_size")
-#         self.output_size = config.get("output_size")
-#         self.tree_lstm = TreeLSTM(32,self.hidden_size,self.device,self.dropout)
-#         self.CNN = CNNmodel(self.dropout, self.input_size, self.output_size)
-#         self.W1 = nn.Linear( self.hidden_size,self.output_size )
-#         self.W2 = nn.Linear( self.output_size * 2,self.output_size )
-#         self.dropout = nn.Dropout( self.dropout )
-#
-#     def forward(self, MS2, trees):
-#
-#         ms_feat_1 = self.CNN( MS2 )
-#         tree_feat_1 = self.W1(self.tree_lstm( trees ))
-#         # ms_feat_1 = standardize( ms_feat_1 )
-#         # tree_feat_1 = standardize( tree_feat_1 )
-#         fused_feat_1 = self.W2(torch.cat([ms_feat_1, tree_feat_1], dim=1))
-#
-#         return fused_feat_1
 
 class Model(nn.Module):
     def __init__(self, config):
@@ -201,64 +177,6 @@ class ModelTree1( nn.Module ):
         smility = torch.matmul(feature1_norm, feature2_norm.T)
         # tree_feat_1 = self.sigmoid(tree_feat_1)
         return tree_feat_1
-
-# class FocalLoss(nn.Module):
-#
-#     def __init__(self, alpha=1.0, gamma=1.0, reduction='mean'):
-#
-#         super(FocalLoss, self).__init__()
-#         self.alpha = alpha
-#         self.gamma = gamma
-#         self.reduction = reduction
-#
-#     def forward(self, y_pred,y_true ):
-#
-#         # 确保输入的预测值是介于0和1之间的概率值
-#         y_pred = torch.sigmoid(y_pred)
-#
-#         # 防止log(0)的情况
-#         epsilon = 1e-7
-#         y_pred = torch.clamp(y_pred, min=epsilon, max=1. - epsilon)
-#
-#         # 计算交叉熵损失
-#         cross_entropy_loss = -y_true * torch.log(y_pred) - (1 - y_true) * torch.log(1 - y_pred)
-#
-#         # 计算Focal Loss
-#         focal_loss =  self.alpha * (1 - y_pred) ** self.gamma * cross_entropy_loss
-#
-#         # 根据 reduction 参数来处理损失
-#         if self.reduction == 'mean':
-#             return torch.mean(focal_loss)
-#         elif self.reduction == 'sum':
-#             return torch.sum(focal_loss)
-#         elif self.reduction == 'none':
-#             return focal_loss
-#         else:
-#             raise ValueError("Invalid value for reduction. Choose 'mean', 'sum' or 'none'.")
-#     def compute_loss(self, y_pred, y_true ):
-#
-#
-#         # y_pred = torch.sigmoid(y_pred)
-#
-#         # 防止log(0)的情况
-#         epsilon = 1e-7
-#         y_pred = torch.clamp(y_pred, min=epsilon, max=1. - epsilon)
-#
-#         # 计算交叉熵损失
-#         cross_entropy_loss = -y_true * torch.log(y_pred) - (1 - y_true) * torch.log(1 - y_pred)
-#
-#         # 计算Focal Loss
-#         focal_loss = self.alpha * (1 - y_pred) ** self.gamma * cross_entropy_loss
-#
-#         # 根据 reduction 参数来处理损失
-#         if self.reduction == 'mean':
-#             return torch.mean(focal_loss)
-#         elif self.reduction == 'sum':
-#             return torch.sum(focal_loss)
-#         elif self.reduction == 'none':
-#             return focal_loss
-#         else:
-#             raise ValueError("Invalid value for reduction. Choose 'mean', 'sum' or 'none'.")
 
 class ModelANN( nn.Module ):
     def __init__(self):
