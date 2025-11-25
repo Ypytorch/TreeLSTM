@@ -9,3 +9,5 @@
 ### 3.eval_model :
 #### A PyTorch implementation that includes CNN, FNN, GCN, and SVM, designed for feature learning and prediction on sequential data, vector data, and graph-structured data.
 
+### 4.model :
+#### Multiple unimodal/bimodal models fused with TreeLSTM and ANN are constructed, including the FocalLoss function and test evaluation tools, which are used for feature fusion and prediction tasks on tree-structured data and MS/MS feature data.
